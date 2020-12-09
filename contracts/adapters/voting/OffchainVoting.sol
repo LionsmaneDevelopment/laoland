@@ -45,6 +45,7 @@ contract OffchainVotingContract is
     using SafeCast for uint256;
     VotingContract private _fallbackVoting;
 
+   
     struct Voting {
         uint256 blockNumber;
         address reporter;
@@ -81,7 +82,7 @@ contract OffchainVotingContract is
     constructor(VotingContract _c) {
         _fallbackVoting = _c;
     }
-
+    
     function configureDao(
         DaoRegistry dao,
         uint256 votingPeriod,

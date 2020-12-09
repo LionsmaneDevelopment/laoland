@@ -38,13 +38,14 @@ contract ManagingContract is IManaging, DaoConstants, MemberGuard {
     using SafeMath for uint256;
     using SafeCast for uint256;
 
-    struct ProposalDetails {
+    struct ProposalDetails { //packed
         address applicant;
         bytes32 moduleId;
         address moduleAddress;
         bytes32[] keys;
-        uint256[] values;
         uint128 flags;
+        uint256[] values;
+        
     }
 
     mapping(uint256 => ProposalDetails) public proposals;

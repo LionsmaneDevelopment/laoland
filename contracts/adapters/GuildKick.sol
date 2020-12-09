@@ -41,12 +41,12 @@ contract GuildKickContract is IGuildKick, DaoConstants, MemberGuard {
 
     enum GuildKickStatus {NOT_STARTED, IN_PROGRESS, DONE}
 
-    struct GuildKick {
+    struct GuildKick {  //packed
         address memberToKick;
+        bytes data;
         GuildKickStatus status;
         uint256 sharesToBurn;
         uint256 initialTotalShares;
-        bytes data;
         uint256 currentIndex;
         uint256 blockNumber;
     }
@@ -67,10 +67,10 @@ contract GuildKickContract is IGuildKick, DaoConstants, MemberGuard {
     ) external override onlyMember(dao) returns (uint64) {
         GuildKick memory guildKick = GuildKick(
             memberToKick,
+            data,
             GuildKickStatus.IN_PROGRESS,
             dao.balanceOf(memberToKick, SHARES),
             dao.balanceOf(TOTAL, SHARES),
-            data,
             0,
             block.number
         );
