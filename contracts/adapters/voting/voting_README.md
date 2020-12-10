@@ -17,36 +17,59 @@ Inherits from:
 
     function configureDao
 
+
+
+Allows for the modification of voting, allows the changing of the votingPeriod, grave period and fallback threshold.
+
+(SETTER) = Changes are passed to <strong>dao.setConfiguration</strong> to actually set the changes. 
+
 ***
-
-Allows for the modification of voting the votingPeriod, grave period and fallback threshold.
-
     function submitVoteResult
 
-***
+
 
 Used to pass a an off-chain voting result to __submitVoteResult, checks that the vote is passed as a majority and the grace period must have ended 
 Otherwise checks if a vote override is valid to pass to _submitVoteResult
 
+(MODIFIER/CHECKER) = _readyToSubmitResult: Is used to check if a result is in a state that is submittable
+
+(SETTER) = _submitVoteResult: Is the setter that submits the actual vote result. 
+
+
+***
 
     function _readyToSubmitResult
 
 
 
 Internal function that returns a bool when a result is ready to submit based on the vote counts provided. 
+
+(PARENT) = submitVoteResult (is a helper for this function)
 ***
     function _submitVoteResult  
 
 Processes the logic and checks for submitting a voting result. Checks if the node result merkle root match and that the result weight is correct before 
 processing the input and changing the vote struct. The sender will have his stake locked after processing this function. 
+
+(PARENT)= _submitVoteResult (is a setter for this function)
+
+(HELPER) = _lockFunds: The above function has _lockFunds() as a helper function
 ***
     function _lockFunds 
 
 Locks loot according to dao.getConfiguration(StakingAmount). Checks if the lockee is an active member and has enough loot to lock. 
+
+(PARENT) = _submitVoteResult: Is a helper to this function.
 ***
     function _releaseFunds
 
 Releases locked loot from a members balance. Checks they have adequate locked loot and they are an active member. 
+
+(UNUSED) - This is an unused function currently, TODO: Back it into some other function/feature.
+
+(SETTER) = dao.addToBalance: This function acts as a setter and does the actual balance adjustment
+
+(SETTER) = dao.subtractFromBalance: This function acts as a setter and does the actual balance adjustment
 ***
     startNewVotingForProposal
 
