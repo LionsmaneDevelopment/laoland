@@ -41,7 +41,7 @@ contract GuildKickContract is IGuildKick, DaoConstants, MemberGuard {
 
     enum GuildKickStatus {NOT_STARTED, IN_PROGRESS, DONE}
 
-    struct GuildKick {  //packed
+    struct GuildKick {  
         address memberToKick;
         bytes data;
         GuildKickStatus status;

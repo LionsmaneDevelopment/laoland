@@ -39,7 +39,7 @@ contract FinancingContract is IFinancing, DaoConstants, MemberGuard {
     using SafeMath for uint256;
     using SafeCast for uint256;
 
-    struct ProposalDetails { //packed
+    struct ProposalDetails {
         address applicant;
         address token;
         bytes32 details;
